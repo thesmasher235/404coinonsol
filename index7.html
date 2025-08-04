@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 Coin - Not Found</title>
+  <link rel="icon" type="image/png" href="404.png">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: #39ff14;
+      font-family: 'Courier New', monospace;
+      overflow-x: hidden; /* Hide horizontal scrollbar */
+      text-shadow: 0 0 3px rgba(57, 255, 20, 0.3);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 9980;
+    }
+
+    #matrix-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      border-bottom: 1px dashed #39ff14;
+    }
+    h1 {
+      font-size: 4rem;
+      letter-spacing: 0.1em;
+      position: relative;
+      animation: glitch-text 1.5s infinite;
+      transform: translate(var(--x, 0), var(--y, 0));
+      transition: transform 0.1s ease-out;
+    }
+
+    h1::before,
+    h1::after {
+      content: '404 COIN';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+    }
+
+    h1::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00c1;
+      animation: glitch-before 1.5s infinite linear alternate-reverse;
+    }
+
+    h1::after {
+      left: -2px;
+      text-shadow: -2px 0 #00ffe7;
+      animation: glitch-after 1.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-text {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 3px); }
+      40% { transform: translate(-3px, -3px); }
+      60% { transform: translate(3px, 3px); }
+      80% { transform: translate(3px, -3px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes glitch-before {
+      0% { clip-path: inset(10% 0 85% 0); }
+      10% { clip-path: inset(40% 0 45% 0); }
+      20% { clip-path: inset(90% 0 2% 0); }
+      30% { clip-path: inset(15% 0 75% 0); }
+      40% { clip-path: inset(40% 0 41% 0); }
+      50% { clip-path: inset(80% 0 5% 0); }
+      60% { clip-path: inset(20% 0 71% 0); }
+      70% { clip-path: inset(50% 0 42% 0); }
+      80% { clip-path: inset(5% 0 88% 0); }
+      90% { clip-path: inset(60% 0 30% 0); }
+      100% { clip-path: inset(95% 0 2% 0); }
+    }
+
+    @keyframes glitch-after {
+      0% { clip-path: inset(85% 0 10% 0); }
+      10% { clip-path: inset(45% 0 40% 0); }
+      20% { clip-path: inset(2% 0 90% 0); }
+      30% { clip-path: inset(75% 0 15% 0); }
+      40% { clip-path: inset(41% 0 40% 0); }
+      50% { clip-path: inset(5% 0 80% 0); }
+      60% { clip-path: inset(71% 0 20% 0); }
+      70% { clip-path: inset(42% 0 50% 0); }
+      80% { clip-path: inset(88% 0 5% 0); }
+      90% { clip-path: inset(30% 0 60% 0); }
+      100% { clip-path: inset(2% 0 95% 0); }
+    }
+    /* Remove purple line at top by removing ::after */
+    h2 {
+      margin-top: 1rem;
+      font-weight: normal;
+      animation: glitch 2.5s infinite steps(1);
+    }
+    .content {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .glitch-box {
+      background: rgba(17, 17, 17, 0.8);
+      backdrop-filter: blur(5px);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      opacity: 0;
+      transform: translateY(40px);
+      border: 1px solid #39ff14;
+      box-shadow:
+        0 0 5px rgba(57, 255, 20, 0.2),
+        inset 0 0 5px rgba(57, 255, 20, 0.2);
+    }
+    .glitch-box.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glitch-box:hover {
+      animation: glitch-hover-effect 0.3s steps(2, end) infinite;
+    }
+
+    @keyframes glitch-hover-effect {
+      0% {
+        text-shadow: 1px 0 0 #ff00c1, -1px 0 0 #00ffe7;
+        box-shadow:
+          0 0 5px rgba(57, 255, 20, 0.2),
+          inset 0 0 5px rgba(57, 255, 20, 0.2),
+          2px 2px 0 #ff00c1,
+          -2px -2px 0 #00ffe7;
+        transform: translate(0,0);
+      }
+      100% {
+        text-shadow: -1px 0 0 #ff00c1, 1px 0 0 #00ffe7;
+        box-shadow:
+          0 0 5px rgba(57, 255, 20, 0.2),
+          inset 0 0 5px rgba(57, 255, 20, 0.2),
+          -2px 2px 0 #ff00c1,
+          2px -2px 0 #00ffe7;
+        transform: translate(1px, -1px);
+      }
+    }
+
+    body.flicker {
+      animation: flicker 0.1s 2;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; background: #0a0a0a; }
+    }
+
+
+
+    .konami-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 10000;
+      display: none;
+      animation: intense-glitch 1s 2;
+    }
+
+    @keyframes intense-glitch {
+      0%, 100% { opacity: 1; }
+      25% { background: #ff00c1; transform: skewX(30deg); }
+      50% { background: #00ffe7; transform: skewX(-30deg); }
+      75% { background: #39ff14; transform: scale(1.1); }
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .social-icons a {
+        color: #39ff14;
+        transition: color 0.3s, transform 0.3s;
+    }
+
+    .social-icons a:hover {
+        color: #ff00c1;
+        transform: scale(1.1);
+        animation: social-icon-glitch 0.4s infinite;
+    }
+
+    .social-icons svg {
+        width: 48px;
+        height: 48px;
+    }
+
+    @keyframes social-icon-glitch {
+        0% { transform: translate(0,0) scale(1.1); }
+        25% { transform: translate(-2px, 2px) scale(1.1); }
+        50% { transform: translate(2px, -2px) scale(1.1); }
+        75% { transform: translate(1px, -1px) scale(1.1); }
+        100% { transform: translate(0,0) scale(1.1); }
+    }
+
+    /* --- Loader Styles --- */
+    #loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 10001;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease-out;
+    }
+    #loader-text {
+        margin-bottom: 1rem;
+    }
+    #progress-bar {
+        width: 200px;
+        height: 15px;
+        border: 1px solid #39ff14;
+    }
+    #progress {
+        width: 0%;
+        height: 100%;
+        background: #39ff14;
+        transition: width 0.1s linear;
+    }
+
+    /* --- Custom Modal Styles --- */
+    .custom-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #1a1a1a;
+        border: 1px solid #39ff14;
+        z-index: 10002;
+        width: 400px;
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+        animation: modal-appear 0.3s;
+    }
+    .modal-hidden {
+        display: none;
+    }
+    .modal-header {
+        background: #39ff14;
+        color: #000;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+    }
+    .modal-close-btn {
+        background: none;
+        border: none;
+        color: #000;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+    .modal-content {
+        padding: 1rem;
+    }
+    .modal-content pre {
+        margin: 0;
+        font-size: 1.2rem;
+        text-align: center;
+        text-shadow: 0 0 5px #39ff14;
+    }
+
+    /* --- Page Transition Styles --- */
+    #main-container {
+        transition: opacity 0.4s ease-in-out;
+    }
+    .page-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9990;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease-in-out;
+        overflow-y: auto;
+        padding: 2rem;
+        box-sizing: border-box;
+    }
+    .page-container.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    body.page-active #main-container {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .back-button {
+        background: #39ff14;
+        color: #000;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-family: 'Courier New', monospace;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* --- File List Styles --- */
+    .file-list {
+        max-height: 60vh;
+        overflow-y: auto;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #111;
+        border: 1px solid #39ff14;
+    }
+    .file-list::-webkit-scrollbar {
+        width: 8px;
+    }
+    .file-list::-webkit-scrollbar-thumb {
+        background: #39ff14;
+        border-radius: 4px;
+    }
+    .file-list::-webkit-scrollbar-track {
+        background: #000;
+    }
+
+    /* --- 3D Cube --- */
+    .cube-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        perspective: 1000px;
+        min-height: 250px; /* Give it some space */
+    }
+
+    .cube {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: spin 20s infinite linear;
+    }
+
+    .cube__face {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: rgba(57, 255, 20, 0.1);
+        border: 1px solid #39ff14;
+        color: #39ff14;
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.3);
+        text-shadow: 0 0 5px #39ff14;
+    }
+
+    .cube__face--front  { transform: rotateY(  0deg) translateZ(50px); }
+    .cube__face--back   { transform: rotateY(180deg) translateZ(50px); }
+    .cube__face--right  { transform: rotateY( 90deg) translateZ(50px); }
+    .cube__face--left   { transform: rotateY(-90deg) translateZ(50px); }
+    .cube__face--top    { transform: rotateX( 90deg) translateZ(50px); }
+    .cube__face--bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+    @keyframes spin {
+        from { transform: rotateX(0) rotateY(0); }
+        to   { transform: rotateX(360deg) rotateY(360deg); }
+    }
+
+    .terminal {
+      background: #0a0a0a;
+      border: 1px solid #39ff14;
+      padding: 1rem;
+      height: 250px;
+      overflow-y: scroll;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 1rem;
+      box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    #terminal-output {
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
+    .terminal-prompt {
+        display: flex;
+        align-items: center;
+    }
+
+    #terminal-input {
+        background: transparent;
+        border: none;
+        color: #39ff14;
+        font-family: 'Courier New', monospace;
+        flex-grow: 1;
+        outline: none;
+        padding-left: 0.5rem;
+    }
+
+    .prompt-user {
+        color: #00ffe7;
+    }
+
+    .prompt-symbol {
+        color: #ff00c1;
+    }
+
+    .ca-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #0a0a0a;
+        padding: 0.5rem;
+        border: 1px solid #39ff14;
+    }
+
+    .copy-btn {
+        background: none;
+        border: none;
+        color: #39ff14;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .copy-btn:hover {
+        color: #ff00c1;
+    }
+
+    .copy-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .terminal::-webkit-scrollbar {
+      width: 8px;
+    }
+    .terminal::-webkit-scrollbar-thumb {
+      background: #39ff14;
+    }
+    .terminal::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+  </style>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div id="loader-text">Initializing...</div>
+        <div id="progress-bar"><div id="progress"></div></div>
+    </div>
+    <div id="custom-modal" class="modal-hidden">
+        <div class="modal-header">
+            <span id="modal-title">SYSTEM ALERT</span>
+            <button class="modal-close-btn" onclick="closeModal()">×</button>
+        </div>
+        <div class="modal-content" id="modal-content-body"></div>
+    </div>
+    <canvas id="matrix-bg"></canvas>
+    <div class="konami-overlay"></div>
+    
+    <div id="main-container">
+        <header>
+        <h1 data-value="404 COIN">404 COIN</h1>
+        <h2 data-value="Not Found. Not Needed. Not Sorry.">Not Found. Not Needed. Not Sorry.</h2>
+      </header>  <div class="content">
+                        <p style="text-align: left; max-width: 60ch; margin: 2rem auto 4rem;">
+          Welcome to <strong>$NFND</strong>, the most gloriously meaningless memecoin on the blockchain. No promises, no plans, no future — just vibes and void.
+        </p>
+
+        <div class="grid-container">
+            <div class="glitch-box" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: center; gap: 2rem;">
+              <div>
+                <h3 data-value="💾 What is $NFND?">💾 What is $NFND?</h3>
+                <p>404 Coin is the anti-utility memecoin. It's not trying to solve a problem. It's here to remind you that most crypto projects don't either.</p>
+              </div>
+              <div class="cube-container">
+                  <div class="cube">
+                      <div class="cube__face cube__face--front">404</div>
+                      <div class="cube__face cube__face--back">$NFND</div>
+                      <div class="cube__face cube__face--right">VOID</div>
+                      <div class="cube__face cube__face--left">NULL</div>
+                      <div class="cube__face cube__face--top">LOST</div>
+                      <div class="cube__face cube__face--bottom">FOUND</div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="glitch-box">
+              <h3 data-value="📎 Roadmap">📎 Roadmap</h3>
+              <p>Error 404: /roadmap Not Found</p>
+            </div>
+
+            <div class="glitch-box">
+              <h3 data-value="📄 Whitepaper">📄 Whitepaper</h3>
+              <p><a href="#" onclick="showPage('whitepaper-page'); return false;">Click here to load the whitepaper</a></p>
+            </div>
+
+            <div class="glitch-box">
+              <h3 data-value="CONTRACT ADDRESS">CONTRACT ADDRESS</h3>
+              <div class="ca-container">
+                <span id="contract-address" style="word-break: break-all;">0x4040404040404040404040404040404040404040</span>
+                <button id="copy-ca-button" class="copy-btn" title="Copy Address">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="glitch-box" style="grid-column: 1 / -1;">
+              <h3 data-value="💻 INTERACTIVE TERMINAL">💻 INTERACTIVE TERMINAL</h3>
+              <div class="terminal" id="terminal">
+                <div id="terminal-output"><p>Initializing... Type 'help' for a list of commands.</p></div>
+                <div class="terminal-prompt">
+                    <span class="prompt-user">user@404</span><span class="prompt-symbol">:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off" autofocus>
+                </div>
+              </div>
+            </div>
+
+            <div class="glitch-box">
+              <h3 data-value="🔍 404 Explorer">🔍 404 Explorer</h3>
+              <p id="blocknum">Block #??</p>
+              <p id="txid">TX: <em>Not Found</em></p>
+              <p id="miner">Miner: VOID-000x</p>
+            </div>
+
+            <div class="glitch-box">
+              <h3 data-value="📡 Holder Ranks">📡 Holder Ranks</h3>
+              <ul>
+                <li>Balance 100–199: Informational</li>
+                <li>200–299: Successful</li>
+                <li>404: Elite</li>
+                <li>500+: Internal Server Whale</li>
+              </ul>
+            </div>
+
+            <div class="glitch-box">
+                <h3 data-value="SYSTEM STATUS">SYSTEM STATUS</h3>
+                <p>Core Temp: <span id="status-temp">88.4</span>°C</p>
+                <p>Signal Strength: <span id="status-signal">-42</span>dBm</p>
+                <p>Data Corruption: <span id="status-corruption">0.013</span>%</p>
+                <p>System Uptime: <span id="status-uptime">1337</span>d</p>
+            </div>
+
+            <div class="glitch-box">
+                <h3 data-value="JOIN THE VOID">JOIN THE VOID</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/coin4not0found4" target="_blank" rel="noopener" title="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+                    <a href="https://t.me/coin4not0found4" target="_blank" rel="noopener" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.1l15.97-6.16c.73-.28 1.36.17 1.15.99l-2.28 10.74c-.22.92-.86 1.14-1.7.71L14.24 16l-4.17 3.98c-.47.44-1.25.21-1.49-.33z"></path></svg></a>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2025 404 Coin. All rights ignored.</p>
+        <p>Error Code: NFND-0420</p>
+      </footer>
+    </div>
+
+    <div id="whitepaper-page" class="page-container">
+        <button class="back-button" onclick="hideAllPages()">[ &lt;-- GO BACK ]</button>
+        <div id="whitepaper-content" style="max-width: 800px; margin: auto;">
+            <h3 style="text-align:center; font-size: 2rem; margin-bottom: 2rem;">404 Coin ($NFND) Whitepaper</h3>
+            <p><strong>Abstract:</strong> By leveraging synergistic paradigms of quantum-encrypted blockchain technology and post-ironic digital scarcity, 404 Coin establishes a new protocol for value-agnostic asset representation. Our mission is to decentralize the very concept of existence, creating a truly trustless and purpose-free ecosystem.</p>
+            <p><strong>1. The Problem:</strong> The digital asset space is saturated with solutions searching for problems. Projects promise to revolutionize industries they barely understand, backed by complex tokenomics that primarily benefit early investors. The core issue is a surplus of purpose.</p>
+            <p><strong>2. The Solution - The Void:</strong> 404 Coin solves this by embracing meaninglessness. It has no utility. It has no roadmap. It is a digital black hole for speculation. By investing in $NFND, you are not investing in a future product; you are purchasing a provably scarce piece of the void.</p>
+            <p><strong>3. Quantum Glitch Consensus (QGC):</strong> Transactions are validated not by work or stake, but by cosmic ray-induced bit-flips on a distributed network of Raspberry Pis running in a shoebox. This ensures that the ledger is both unpredictable and fundamentally unsound, a perfect mirror of the market itself.</p>
+            <p><strong>Conclusion:</strong> 404 Coin is not the future. It is the absence of a future. Buy $NFND.</p>
+        </div>
+    </div>
+    <div id="access-files-page" class="page-container">
+        <button class="back-button" onclick="hideAllPages()">[ &lt;-- GO BACK ]</button>
+        <div id="access-files-content" style="max-width: 800px; margin: auto;">
+            <!-- File content will be injected here -->
+        </div>
+    </div>
+    <div id="secret-page" class="page-container">
+        <button class="back-button" onclick="hideAllPages()">[ &lt;-- GO BACK ]</button>
+        <div id="secret-content" style="max-width: 800px; margin: auto; text-align: center;">
+            <h3 style="font-size: 2.5rem; color: #ff00c1; text-shadow: 0 0 10px #ff00c1;">// SECRET_ACCESS_GRANTED //</h3>
+            <p>You found the backdoor. Welcome, elite hacker.</p>
+            <p>The real whitepaper is a haiku:</p>
+            <pre style="font-size: 1.5rem; border: 1px dashed #ff00c1; padding: 1rem; margin-top: 2rem; background: rgba(255, 0, 193, 0.1); text-shadow: none;">
+Green text on a screen,
+Meaningless numbers climb high,
+The void stares back now.
+            </pre>
+            <p style="margin-top: 2rem;">Protocol "Zero-Day-Panda" initiated.</p>
+        </div>
+    </div>
+  <script>
+    // --- Interactive Terminal ---
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalElement = document.getElementById('terminal');
+
+    const commands = {
+        help: `Available commands:
+- help: Show this help message.
+- clear: Clear the terminal screen.
+- status: Display the current system status.
+- whitepaper: View the official document.
+- files: Access the file system.
+- mine: Initiate a fake mining process.`,
+        clear: () => {
+            terminalOutput.innerHTML = '';
+            return '';
+        },
+        status: () => {
+            const temp = document.getElementById('status-temp').innerText;
+            const signal = document.getElementById('status-signal').innerText;
+            const corruption = document.getElementById('status-corruption').innerText;
+            const uptime = document.getElementById('status-uptime').innerText;
+            return `
+System Status:
+- Core Temp: ${temp}°C
+- Signal Strength: ${signal}dBm
+- Data Corruption: ${corruption}%
+- System Uptime: ${uptime}d
+            `;
+        },
+        whitepaper: () => {
+            showPage('whitepaper-page');
+            return 'Loading whitepaper...';
+        },
+        files: () => {
+            showFileSystemModal();
+            return 'Accessing file system...';
+        },
+        mine: () => {
+            let mineCount = 0;
+            const mineInterval = setInterval(() => {
+                if (mineCount >= 5) {
+                    clearInterval(mineInterval);
+                    appendTerminalLine('Mining complete. 0 $NFND found.');
+                    return;
+                }
+                const hash = '0x' + [...Array(10)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+                appendTerminalLine(`Mining... Found hash: ${hash}`);
+                mineCount++;
+            }, 800);
+            return 'Initiating mining sequence...';
+        }
+    };
+
+    terminalInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const command = terminalInput.value.trim().toLowerCase();
+            appendTerminalLine(`<span class="prompt-user">user@404</span><span class="prompt-symbol">:~$</span> ${command}`);
+            if (command in commands) {
+                const output = typeof commands[command] === 'function' ? commands[command]() : commands[command];
+                if (output) {
+                    appendTerminalLine(output);
+                }
+            } else if (command) {
+                appendTerminalLine(`Command not found: ${command}. Type 'help' for a list of commands.`);
+            }
+            terminalInput.value = '';
+            terminalElement.scrollTop = terminalElement.scrollHeight;
+        }
+    });
+
+    function appendTerminalLine(line) {
+        const p = document.createElement('p');
+        p.innerHTML = line.replace(/\n/g, '<br>');
+        terminalOutput.appendChild(p);
+        terminalElement.scrollTop = terminalElement.scrollHeight;
+    }
+
+    // --- Copy Contract Address ---
+    const copyButton = document.getElementById('copy-ca-button');
+    const contractAddress = document.getElementById('contract-address').innerText;
+
+    copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(contractAddress).then(() => {
+            const originalContent = copyButton.innerHTML;
+            copyButton.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            setTimeout(() => {
+                copyButton.innerHTML = originalContent;
+            }, 1500);
+        }, (err) => {
+            showModal("ERROR", "Failed to copy address.");
+            console.error('Could not copy text: ', err);
+        });
+    });
+
+    // Fake terminal text
+    const terminal = document.getElementById('terminal');
+    const messages = [
+      "Connecting to void...",
+      "Pinging block height: ???",
+      "TXNFND_000x: not processed",
+      "Glitch error_14@# — continuing anyway",
+      "404 MINED successfully. Probably.",
+      "Hash: DEAD-BEEF-404",
+      "Timestamp: ¯\\_(ツ)_/¯",
+      "Syncing with phantom ledger...",
+      "All systems unstable.",
+      "Error: Success not found.",
+      "Mining in progress...",
+      "404 Faucet: Dry as ever.",
+      "System rebooted into the void.",
+      "Block not found. Try again later.",
+      "TXNFND_404x: lost in cyberspace."
+    ];
+    let i = 1;
+    setInterval(() => {
+      if (i >= messages.length) return;
+      const p = document.createElement('p');
+      p.textContent = messages[i++];
+      // Random color for each terminal line
+      const colors = ['#39ff14', '#ff00c1', '#00ffe7', '#fff', '#fffb00'];
+      p.style.color = colors[Math.floor(Math.random() * colors.length)];
+      terminal.appendChild(p);
+      terminal.scrollTop = terminal.scrollHeight;
+    }, 1200);
+
+    // Faucet popup
+    function faucetPopup() {
+      const phrases = [
+        "404 Faucet: No coins dispensed.",
+        "Error: Faucet not found.",
+        "Try again later. Or don't.",
+        "You got 0 $NFND! Congrats?",
+        "Faucet is dry. Like your hopes."
+      ];
+      alert(phrases[Math.floor(Math.random()*phrases.length)]);
+    }
+
+    // Randomize explorer block/tx/miner
+    function randomExplorer() {
+      document.getElementById('blocknum').textContent = 'Block #' + (Math.floor(Math.random()*10000)+1000);
+      document.getElementById('txid').innerHTML = 'TX: <em>' + (Math.random()<0.5 ? 'Not Found' : 'NFND_' + Math.floor(Math.random()*100000)) + '</em>';
+      document.getElementById('miner').textContent = 'Miner: VOID-000' + String.fromCharCode(97+Math.floor(Math.random()*26));
+    }
+    setInterval(randomExplorer, 3000);
+
+    // --- Glitch Effects ---
+
+    // 1. Random Flicker
+    setInterval(() => {
+      document.body.classList.add('flicker');
+      setTimeout(() => document.body.classList.remove('flicker'), 200);
+    }, Math.random() * 8000 + 5000); // every 5-13 seconds
+
+    // 3. Apply glitch to all h3s
+    document.querySelectorAll('h3').forEach(h3 => {
+      h3.classList.add('glitch-text-2');
+    });
+
+    // --- New Enhancements ---
+
+    // 5. Interactive Header
+    const headerEl = document.querySelector('header');
+    const h1El = document.querySelector('h1');
+    headerEl.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { offsetWidth, offsetHeight } = headerEl;
+        const x = (clientX / offsetWidth - 0.5) * 30;
+        const y = (clientY / offsetHeight - 0.5) * 30;
+        h1El.style.setProperty('--x', `${-x}px`);
+        h1El.style.setProperty('--y', `${-y}px`);
+    });
+
+    // 6. Scroll-triggered animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.glitch-box').forEach(box => {
+        observer.observe(box);
+    });
+
+    // 7. Konami Code Easter Egg
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === konamiCode[konamiIndex].toLowerCase()) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                showPage('secret-page');
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+
+    // --- Page Load & Modals ---
+    window.onload = () => {
+        const loaderOverlay = document.getElementById('loader-overlay');
+        const loaderText = document.getElementById('loader-text');
+        const progress = document.getElementById('progress');
+        const loadMessages = ["Connecting to void...", "Decrypting data streams...", "Booting into the void..."];
+        let msgIndex = 0;
+        let progressValue = 0;
+
+        const loaderInterval = setInterval(() => {
+            if (msgIndex < loadMessages.length) {
+                loaderText.textContent = loadMessages[msgIndex];
+                msgIndex++;
+            }
+            progressValue += 34;
+            progress.style.width = Math.min(progressValue, 100) + '%';
+
+            if (progressValue >= 100) {
+                clearInterval(loaderInterval);
+                setTimeout(() => {
+                    loaderOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        loaderOverlay.style.display = 'none';
+                        window.scrollTo(0, 0);
+                    }, 500);
+                }, 200);
+            }
+        }, 250);
+    };
+
+    const modal = document.getElementById('custom-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content-body');
+
+    function showModal(title, content) {
+        modalTitle.textContent = title;
+        modalContent.innerHTML = content;
+        modal.classList.remove('modal-hidden');
+    }
+
+    function closeModal() {
+        modal.classList.add('modal-hidden');
+    }
+
+    function showPage(pageId) {
+        document.body.classList.add('page-active');
+        document.getElementById(pageId).classList.add('visible');
+    }
+
+    function hideAllPages() {
+        document.body.classList.remove('page-active');
+        document.querySelectorAll('.page-container').forEach(p => p.classList.remove('visible'));
+    }
+
+    function showWhitepaperModal() {
+        showPage('whitepaper-page');
+    }
+
+    function showFaucetModal() {
+        const art = `<pre>
+  _______
+ |       |
+ |       |
+ |_______|
+  \\     /
+   \\   /
+    \\ /
+</pre><p style="text-align:center; margin-top:1rem;">FAUCET IS DRY</p>`;
+        showModal("FAUCET STATUS", art);
+    }
+
+    // --- File System Modal ---
+    function showFileSystemModal() {
+      const fileList = `
+        <h3 style="text-align:center;">Available Files</h3>
+        <ul>
+          <li><a href="#" style="color:#39ff14;">/README.txt</a></li>
+          <li><a href="#" style="color:#39ff14;">/config/settings.json</a></li>
+          <li><a href="#" style="color:#39ff14;">/data/blockchain.dat</a></li>
+          <li><a href="#" style="color:#39ff14;">/logs/error.log</a></li>
+          <li><a href="#" style="color:#39ff14;">/mining/worker1.log</a></li>
+        </ul>
+        <p style="text-align:center; margin-top:1rem;">
+          <button onclick="accessFile('/README.txt')" style="background:#39ff14; color:#000; border:none; padding:0.5rem 1rem; cursor:pointer;">Open README.txt</button>
+        </p>
+      `;
+      document.getElementById('access-files-content').innerHTML = fileList;
+      showPage('access-files-page');
+    }
+
+    function accessFile(filename) {
+      const fileContents = {
+        '/README.txt': `404 Coin - Readme File
+        
+Welcome to the 404 Coin project. This is not a coin, it is a statement. A statement that not all that is digital needs to have value, purpose, or even existence beyond the void of the blockchain.
+
+        `,
+        '/config/settings.json': `{
+  "mining": {
+    "enabled": false,
+    "threads": 0
+  },
+  "network": {
+    "port": 40404,
+    "host": "127.0.0.1"
+  },
+  "ui": {
+    "theme": "dark",
+    "language": "en"
+  }
+}
+        `,
+        '/data/blockchain.dat': `0000000000000000000000000000000000000000000000000000000000000000
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+404040404040404040404040404040404040404040404040404040404040
+        `,
+        '/logs/error.log': `ERROR 404: Resource not found
+WARNING: Connection to void unstable
+NOTICE: New miner joined the void
+        `,
+        '/mining/worker1.log': `INFO: Mining started
+ERROR: Connection lost
+INFO: Reconnecting...
+        `
+      };
+
+      const content = fileContents[filename] || 'File not found';
+      const fileViewer = `
+        <h3 style="color:#39ff14;">${filename}</h3>
+        <pre style="color:#fff; background:#111; padding:1rem; border-radius:4px;">${content}</pre>
+      `;
+      document.getElementById('access-files-content').innerHTML = fileViewer;
+    }
+
+    // --- Matrix Background & Text Scramble ---
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
+
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const rainDrops = [];
+
+    for (let x = 0; x < columns; x++) {
+        rainDrops[x] = 1;
+    }
+
+    const drawMatrix = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#39ff14';
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                rainDrops[i] = 0;
+            }
+            rainDrops[i]++;
+        }
+    };
+
+    setInterval(drawMatrix, 30);
+
+    // Text Scramble
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
+    document.querySelectorAll('[data-value]').forEach(element => {
+        let interval = null;
+        const originalValue = element.dataset.value;
+
+        element.onmouseover = event => {
+            let iteration = 0;
+            clearInterval(interval);
+
+            interval = setInterval(() => {
+                event.target.innerText = originalValue
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < iteration) {
+                            return originalValue[index];
+                        }
+                        return letters[Math.floor(Math.random() * letters.length)]
+                    })
+                    .join("");
+
+                if(iteration >= originalValue.length){
+                    clearInterval(interval);
+                }
+                iteration += 1 / 3;
+            }, 30);
+        }
+    });
+
+    // System Status updater
+    const tempEl = document.getElementById('status-temp');
+    const signalEl = document.getElementById('status-signal');
+    const corruptionEl = document.getElementById('status-corruption');
+    const uptimeEl = document.getElementById('status-uptime');
+    let uptime = 1337;
+
+    setInterval(() => {
+        tempEl.innerText = (85 + Math.random() * 10).toFixed(1);
+        signalEl.innerText = (-40 - Math.random() * 10).toFixed(0);
+        corruptionEl.innerText = (Math.random() * 0.02).toFixed(4);
+        uptime++;
+        uptimeEl.innerText = uptime;
+    }, 2000);
+
+  </script>
+</body>
+</html>
